@@ -26,7 +26,12 @@ describe "DataReader" do
 
   #successfully reads .txt file using F.size
   it "size of dataset should not equal to zero" do
-    DataReader.source.wont_be_nil
+    @entry.dataset.size.wont_be_nil
+  end
+
+  # reads a line from dataset and store in instance variable
+  it "reads the first line and stores in temporary_variable" do
+    @entry.obtain_data.must_be_instance_of String
   end
 
 end

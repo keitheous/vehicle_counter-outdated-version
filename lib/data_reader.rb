@@ -1,18 +1,18 @@
 require 'pry'
 
 class DataReader
-  attr_accessor :north_bound, :south_bound
+  attr_accessor :north_bound, :south_bound, :dataset, :temporary_variable
 
-  def initialize
+  def initialize (dataset = "../fake_data.txt")
     @north_bound = {}
     @south_bound = {}
+    @temporary_variable = ""
+    @dataset = dataset
   end
 
-  def self.source(dataset = "../fake_data.txt")
-    File.size(dataset)
-
+  def obtain_data
+    @temporary_variable = IO.readlines(@dataset)[0]
     # binding.pry
   end
 end
-
-# DataReader.source
+# DataReader.new.obtain_data
