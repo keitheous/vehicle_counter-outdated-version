@@ -31,7 +31,13 @@ describe "DataReader" do
 
   # reads a line from dataset and store in instance variable
   it "reads the first line and stores in temporary_variable" do
-    @entry.obtain_data.must_be_instance_of String
+    @entry.read_lines.must_be_instance_of Range
   end
+
+  # reads a line from dataset and store in instance variable
+  it "reads the first line and stores in temporary_variable" do
+    @entry.read_lines.north_bound.size.wont_equal {}
+  end
+
 
 end
