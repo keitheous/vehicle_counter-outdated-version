@@ -1,48 +1,51 @@
 require 'pry'
 
 class DataReader
-  attr_accessor :north_bound, :south_bound, :dataset, :temporary_variable
+  attr_accessor :north_bound, :south_bound, :dataset, :temporary_variable, :file
 
   def initialize (dataset = "../fake_data.txt")
+    @file = File.readlines(dataset)
     @north_bound = {}
     @south_bound = {}
-    @temporary_variable = []
-    @dataset = dataset
+    @temporary_B_variable = []
+
   end
 
-  def read_lines
-    number_of_lines = File.open(@dataset,"r").to_a.count
-    day = 1
-    north_vehicle = 1
-    south_vehicle = 1
-    line_1 = ""
-    line_2 = ""
+  def sort_lines
+    vehicle_NB_count = 1
+    vehicle_SB_count = 1
+    number_of_lines = @file.size
 
     (0...number_of_lines).each do |index|
       if (index % 2 == 0)
-        line_1 = /.\d+/.match(IO.readlines(@dataset)[index])
-        line_2 = /.\d+/.match(IO.readlines(@dataset)[index+1])
-        line_3 = /.\d+/.match(IO.readlines(@dataset)[index+3])
-        @temporary_variable[0] = line_1.to_s
-        @temporary_variable[1] = line_2.to_s
 
-        if @temporary_variable[0][0] == @temporary_variable[1][0]
-          # puts "North_Bound!!"
-          @north_bound["vehicle no. #{north_vehicle}"] = {
-            "1st axle" => @temporary_variable[0],
-            "2nd axle" => @temporary_variable[1]
+        if @file[index][0] == @file[index+1][0]
+          @north_bound["Vehicle #{vehicle_NB_count}"] = {
+            "1st" => @file[index],
+            "2nd" => @file[index+1]
           }
-          north_vehicle += 1
-        # elsif @temporary_variable[1][0] == "B"
-
+          vehicle_NB_count +=1
         end
-
       end
 
-      @north_bound
+      if @file[index][0] == "B"
+        @temporary_B_variable.push(@file[index])
+      end
+
     end
 
+    @temporary_B_variable.each_with_index do |line, index|
+      if (index % 2 == 0)
+        @south_bound["Vehicle #{vehicle_SB_count}"] = {
+          "1st" => line,
+          "2nd" => @temporary_B_variable[index+1]
+        }
+        vehicle_SB_count += 1
+      end
+    end
+    @north_bound
     # binding.pry
+
   end
 end
-# DataReader.new.read_lines
+# DataReader.new.sort_lines

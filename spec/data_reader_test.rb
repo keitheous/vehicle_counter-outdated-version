@@ -2,42 +2,35 @@ require 'pry'
 gem 'minitest', '>= 5.0.0'
 require 'minitest/autorun'
 require_relative '../lib/data_reader'
-require 'minitest/pride'
+require "minitest/pride"
 
-describe "DataReader" do
-
-  before do
+class DataReaderTest < Minitest::Test
+  #initialize @north_bound as an hash
+  def setup
     @entry = DataReader.new
-  end
-  #create an initialize function under DataReaderClass
-  it "entry must not equal to nil" do
-    @entry.wont_be_nil
+    @processed = DataReader.new.sort_lines
   end
 
-  #define north_bound as an empty Hash
-  it "north bound defined as empty hash" do
-    @entry.north_bound.must_equal Hash.new
+  def test_whats_north_bound_declared_as?
+    assert_equal Hash.new, @entry.north_bound
   end
 
-  #define south_bound as an empty Hash
-  it "south bound defined as empty hash" do
-    @entry.south_bound.must_equal Hash.new
+  #initialize @south_bound as an hash
+  def test_whats_south_bound_declared_as?
+    assert_equal Hash.new, @entry.south_bound
   end
 
-  #successfully reads .txt file using F.size
-  it "size of dataset should not equal to zero" do
-    @entry.dataset.size.wont_be_nil
+  #successfully reads dataset - locatable
+  def test_location_of_dataset
+    assert_equal true , @entry.file.size > 0
   end
 
-  # reads a line from dataset and store in instance variable
-  it "reads the first line and stores in temporary_variable" do
-    @entry.read_lines.must_be_instance_of Range
+  def test_after_sort_methid_NB_hash_is_populated
+    assert_equal true, @processed.north_bound.size > 0
   end
 
-  # reads a line from dataset and store in instance variable
-  it "reads the first line and stores in temporary_variable" do
-    @entry.read_lines.north_bound.size.wont_equal {}
+  def test_after_sort_methid_SB_hash_is_populated
+    assert_equal true, @processed.south_bound.size > 0
   end
-
 
 end
