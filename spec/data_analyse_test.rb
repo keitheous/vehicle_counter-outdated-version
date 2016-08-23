@@ -2,13 +2,13 @@ require 'pry'
 gem 'minitest', '>= 5.0.0'
 require 'minitest/autorun'
 #is this necessary?
-require_relative '../lib/data_reader_2'
-require_relative '../lib/analysis'
+# require_relative '../lib/data_reader_2'
+require_relative '../lib/data_analyse'
 require "minitest/pride"
 
-class AnalysisTest < Minitest::Test
+class DataAnalyseTest < Minitest::Test
   def setup
-    @begin = Analyse.new
+    @begin = DataAnalyse.new
   end
   #nb is successfully populated from data reader
   def test_that_nb_is_not_nil
@@ -26,5 +26,5 @@ class AnalysisTest < Minitest::Test
     assert_equal true, boolean
   end
 
-  
+
 end

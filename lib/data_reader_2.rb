@@ -99,3 +99,9 @@ end
 #
 # @south_bound["Vehicle 36"]["1st"][0..1]
 # @south_bound.select{|key, hash| hash["Day"] == 1 }
+# nb_m.select{|key, hash| hash["1st UTC"][0] == "0" && hash["1st UTC"][1] == "6" }
+
+# [7] pry(main)> ("05".."15").each do |index|
+# [7] pry(main)*   puts index[0]
+# [7] pry(main)*   puts index[1]
+# [7] pry(main)* end
