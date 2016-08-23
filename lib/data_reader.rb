@@ -8,7 +8,6 @@ class DataReader
     @north_bound = {}
     @south_bound = {}
     @temporary_B_variable = []
-
   end
 
   def sort_lines
