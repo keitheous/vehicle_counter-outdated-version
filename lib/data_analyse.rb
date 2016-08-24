@@ -37,6 +37,9 @@ class DataAnalyse
     # puts "hourly breakdown:"
     ("00"..."24").each do |index|
       time = (index.to_i + 11) % 12 + 1
+      # if 00 in the morning => 11 % 12 + 1 => 12
+      # if 23 in the evening => 34 % 12 + 1 => 11
+      # if 15 in the afternoon => 26 % 12 + 1 => 3
       index.to_i < 12 ? meridiem = "am" : meridiem = "pm"
 
       stored_hourly["#{time}#{meridiem}"] = @subject.select{
