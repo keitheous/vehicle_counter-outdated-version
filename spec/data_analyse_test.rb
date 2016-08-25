@@ -3,7 +3,7 @@ gem 'minitest', '>= 5.0.0'
 require 'minitest/autorun'
 #is this necessary?
 # require_relative '../lib/data_reader_2'
-require_relative '../lib/data_analyse'
+require_relative '../lib/data_analyse_2'
 require "minitest/pride"
 
 class DataAnalyseTest < Minitest::Test
